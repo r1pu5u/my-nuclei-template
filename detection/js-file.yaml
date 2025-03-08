@@ -1,0 +1,26 @@
+id: js-file-detect
+
+info:
+  name: JS File Detection
+  author: r1pu5u
+  severity: info
+  description: Searches for valid JavaScript URLs
+  tags: js
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+    redirects: false
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: header
+        words:
+          - "javascript"
+
