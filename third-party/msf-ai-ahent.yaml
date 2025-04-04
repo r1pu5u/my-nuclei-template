@@ -1,0 +1,27 @@
+id: msft-ai-agent
+
+info:
+  name: microsoft ai agentdetection
+  author: r1pu5u
+  severity: info
+  description: microsoft ai agent
+  tags: ai
+
+http:
+  - method: GET
+    path:
+      - "https://login.microsoftonline.com/{{FQDN}}/.well-known/openid-configuration"
+    redirects: false
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: body
+        words:
+          - '"token_endpoint"'
+          - '"jwks_uri"'
+
